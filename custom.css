@@ -1,0 +1,365 @@
+/* ==========================================================================
+   1. GLOBAL VARIABLES & BODY
+   ========================================================================== */
+:root {
+    --brand-green: #3c8e5e;
+    --brand-red: #ff76a4;
+    --brand-white: #ffffff;
+    --footer-pattern: linear-gradient(rgba(60, 142, 94, 0.9), rgba(60, 142, 94, 0.9)), url('images/resized_image.png');
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body {
+    background-color: white;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. INTRO LOADING OVERLAY (STARS GATHERING ANIMATION)
+   ========================================================================== */
+.intro-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--brand-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.spinning-logo div {
+    position: relative;
+    width: 270px; 
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star {
+    position: absolute;
+    width: 15px; 
+    height: 15px;
+    background-color: #FFD700;
+    
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0;
+    box-shadow: 0 0 15px #FFD700;
+    z-index: 3;
+}
+
+.star:nth-child(1) { --tx: -60px; --ty: -85px; animation: gatherStar 1.5s ease-out forwards 0.1s; }
+.star:nth-child(2) { --tx: -30px; --ty: -105px; animation: gatherStar 1.5s ease-out forwards 0.3s; }
+.star:nth-child(3) { --tx: 0px;   --ty: -115px; animation: gatherStar 1.5s ease-out forwards 0.5s; }
+.star:nth-child(4) { --tx: 30px;  --ty: -105px; animation: gatherStar 1.5s ease-out forwards 0.2s; }
+.star:nth-child(5) { --tx: 60px;  --ty: -85px;  animation: gatherStar 1.5s ease-out forwards 0.4s; }
+
+.star:nth-child(n+6) { display: none; }
+
+.spinning-logo img {
+    max-width: 80%; 
+    height: auto;
+    z-index: 2;
+}
+
+.intro-overlay.loaded {
+    animation: swipeDown 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards !important;
+}
+/* ==========================================================================
+   3. NAVIGATION 
+   ========================================================================== */
+.logo-wrapper {
+    background: var(--brand-green) !important;
+    margin-bottom: .5px !important; 
+    border-bottom: 1px solid rgba(230, 77, 72, 0.3); 
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
+    line-height: 0; 
+}
+
+.custom-navbar-slim {
+    background: var(--brand-green) !important;
+    min-height: 0 !important; 
+    height: auto !important;
+    padding: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-logo {
+    height: 65px !important; 
+    width: auto;      
+    filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.2)); 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.small-nav-link {
+    font-size: 13px !important; 
+    font-weight: 400 !important; 
+    color: var(--brand-white) !important;
+    padding: 5px 25px !important;
+    line-height: 1.1 !important; 
+    transition: all 0.3s ease;
+    text-shadow: none !important;
+}
+
+.small-nav-link:hover {
+    color: var(--brand-white) !important;
+    background-color: rgba(230, 77, 72, 0.2); 
+    border-radius: 4px;
+}
+
+.small-nav-link.active, 
+.small-nav-link[aria-current="page"] {
+    color: var(--brand-white) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid var(--brand-red); 
+}
+
+/* Logo Hover Effect */
+.nav-logo, .footer-logo {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    cursor: pointer;
+}
+
+.nav-logo:hover, .footer-logo:hover {
+    transform: scale(1.08) translateY(-2px); 
+    filter: brightness(1.1) drop-shadow(0px 5px 15px rgba(0,0,0,0.2)); 
+}
+
+/* ==========================================================================
+   4. HERO & VIDEO SECTION (Fixing Centering)
+   ========================================================================== */
+.hero-video-wrapper {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 115px); 
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-overlay-content {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;       
+    height: 100%;      
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.3); 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    justify-content: center; 
+    color: white;
+    text-align: center;      
+}
+
+.video-overlay-content .container {
+    background: transparent !important; 
+    padding: 20px;
+    max-width: 900px;
+}
+/* ==========================================================================
+   5. SERVICE CARDS & SECTIONS
+   ========================================================================== */
+.custom-section {
+    background-color: #f9f9f9;
+    border-radius: 40px;
+    border: 2px dashed var(--brand-green);
+}
+
+.service-card {
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(60, 142, 94, 0.15);
+    border: 1px solid var(--brand-red);
+}
+
+/* ==========================================================================
+   6. FOOTER SECTION
+   ========================================================================== */
+.site-footer-modern {
+    background: var(--brand-green) !important;
+    color: var(--brand-white) !important;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(230, 77, 72, 0.3);
+}
+
+.site-footer-modern h6 {
+    letter-spacing: 1.5px;
+    color: var(--brand-white) !important;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--brand-red);
+    display: inline-block;
+}
+
+.social-icon-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px !important;
+    height: 38px !important;
+    
+    padding: 0 !important; 
+    
+    border: 1.5px solid var(--brand-red);
+    border-radius: 8px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-right: 10px;
+    overflow: hidden; 
+}
+
+.social-icon-link:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.social-icon-link img,
+.social-icon-link svg {
+
+    width: 20px !important;  
+    height: 20px !important;
+    
+    object-fit: contain !important; 
+    
+    display: block;
+    margin: auto;
+}
+
+.footer-btn-pill {
+    display: inline-block;
+    padding: 10px 24px !important;
+    border-radius: 50px !important;
+    background-color: var(--brand-white) !important;
+    color: var(--brand-green) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.footer-btn-pill:hover {
+    background-color: var(--brand-red) !important;
+    color: var(--brand-white) !important;
+    transform: translateY(-2px);
+}
+
+.footer-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.footer-heading {
+    color: var(--brand-white) !important;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--brand-red);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-subtext {
+    font-size: 12px;
+    opacity: 0.6;
+    color: var(--brand-white);
+}
+/* ==========================================================================
+   7. KEYFRAMES
+   ========================================================================== */
+
+@keyframes gatherStar {
+    0% {
+        /* Start from random off-screen corners */
+        transform: translate(calc(var(--tx) * 5), calc(var(--ty) * 5)) scale(3) rotate(0deg);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1) rotate(360deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 8px #fff);
+    }
+}
+
+@keyframes swipeDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); visibility: hidden; }
+}
+/* ==========================================================================
+   8. MOBILE & RESPONSIVE
+   ========================================================================== */
+@media (max-width: 767.98px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 100%; 
+        left: 10px;
+        right: 10px;
+        background: rgba(60, 142, 94, 0.98); 
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px; 
+        padding: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        margin-top: 10px; 
+    }
+
+    .modern-mobile-menu {
+        padding: 0;
+        margin: 0;
+    }
+
+    .modern-mobile-menu .nav-link {
+        color: var(--brand-white) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 0 !important; 
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .modern-mobile-menu li:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    .navbar-toggler {
+        margin-right: 0 !important;
+    }
+}
+/* ==========================================================================
+   9. CONTACT & MISC
+   ========================================================================== */
+.contact-icon {
+    height: 20px; 
+    width: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.d-flex.align-items-center {
+    align-items: center !important;
+}
